@@ -1,0 +1,22 @@
+[build]
+  publish = "."
+
+# El HTML se revalida siempre: al desplegar, los cambios se ven al instante.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Las imágenes cambian poco: caché larga.
+[[headers]]
+  for = "/assets/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/favicon.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
